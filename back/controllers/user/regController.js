@@ -1,6 +1,6 @@
 import User from '../../models/userModel.js'
 import asyncHandler from 'express-async-handler' // Выводит ошибки при наличии
-// import { generateToken } from '../../helpers/generateToken.js'
+import { generateToken } from '../../helpers/generateToken.js'
 
 // @desc    Register user
 // @route   POST /api/users
@@ -21,7 +21,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 		password,
 	})
 
-	//Create token
+	const token = generateToken(user._id)
 
-	res.json(user) //Отдаем юзера, к-го зарегали
+	res.json({ user, token }) //Отдаем юзера, к-го зарегали и токен
 })

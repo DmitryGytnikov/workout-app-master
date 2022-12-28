@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs' //Шифрует пароли
 
 const userSchema = mongoose.Schema(
 	{
@@ -18,13 +18,13 @@ const userSchema = mongoose.Schema(
 		},
 	},
 	{
-		minimize: false,
-		timestamps: true,
+		minimize: false, // Если нет данных - поле все же возвращ-ся
+		timestamps: true, // Марки
 	}
 )
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
-	return await bcrypt.compare(enteredPassword, this.password)
+	return await bcrypt.compare(enteredPassword, this.password) //Сравнивать
 }
 
 userSchema.pre('save', async function (next) {
