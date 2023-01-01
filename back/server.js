@@ -11,6 +11,7 @@ import { errorHandler, notFound } from './middleware/errorMiddleware.js'
 
 /* Routes */
 import userRoutes from './routes/userRoutes.js' // Для бэка .js обязательно  писать
+import exerciseRoutes from './routes/exerciseRoutes.js'
 
 dotenv.config() // Чтобы везде работали переменные среды из process.env. в .env
 
@@ -24,6 +25,7 @@ app.use(express.json()) // Настройки экспресс- ответ в js
 
 /* Инициализация */
 app.use('/api/users', userRoutes) // путь, роут
+app.use('/api/exercises', exerciseRoutes) // путь, роут
 
 app.use(notFound)
 app.use(errorHandler)
