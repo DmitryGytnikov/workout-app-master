@@ -1,10 +1,10 @@
 import asyncHandler from 'express-async-handler'
 import Exercise from '../../models/exerciseModel.js'
 
-// @desc    Add new exercise Описание
+// @desc    Create new exercise Описание
 // @route   Post /api/exercises Путь
 // @access  Private Доступ - авторизованный пользователь
-export const addNewExercise = asyncHandler(async (req, res) => {
+export const createNewExercise = asyncHandler(async (req, res) => {
 	//Получаем данные:
 	const { name, times, imageId } = req.body
 	// Самомтоятельно Заменил image на imageId - Макс этого не делал; сделал, чтобы в инсомнии работал этот пост-запрос и создавался документ новый в БД
