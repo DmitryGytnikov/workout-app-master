@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import ExerciseLog from '../../../models/exerciseLogModel.js'
 
-// @desc    Update exercise log //Обновление
+// @desc    Update exercise log  //Обновление
 // @route   PUT /api/exercises/log
 // @access  Private
 export const updateExerciseLog = asyncHandler(async (req, res) => {
@@ -22,7 +22,7 @@ export const updateExerciseLog = asyncHandler(async (req, res) => {
 		throw new Error('Вы не указали все поля!')
 	}
 
-	newTimes[timeIndex][key] = value
+	newTimes[timeIndex][key] = value // Перезаписываем
 
 	currentLog.times = newTimes
 
