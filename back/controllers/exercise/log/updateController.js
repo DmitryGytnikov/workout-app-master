@@ -30,3 +30,26 @@ export const updateExerciseLog = asyncHandler(async (req, res) => {
 
 	res.json(updatedLog)
 })
+
+// @desc    Update status of complete exercise log
+// @route   PUT /api/exercises/log/complete
+// @access  Private
+export const updateCompleteExerciseLog = asyncHandler(async (req, res) => {
+	const { logId, completed } = req.body // completed - это передаваемый статус завершения
+
+	const currentLog = await ExerciseLog.findById(logId).populate(
+		'exercise',
+		'workout'
+	)
+
+	if (!currentLog) {
+		res.status(404)
+		throw new Error('Данный лог не найден!')
+	}
+
+	currentLog.completed = completed
+
+	const updatedLog = await currentLog.save()
+
+	res.json(updatedLog)
+})
