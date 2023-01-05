@@ -1,4 +1,5 @@
 import express from 'express'
+import { createNewWorkoutLog } from '../controllers/workout/logController.js'
 import { createNewWorkout } from '../controllers/workout/workoutController.js'
 import { getWorkout } from '../controllers/workout/workoutController.js'
 
@@ -8,6 +9,8 @@ const router = express.Router()
 
 router.route('/').post(protect, createNewWorkout)
 //запрос  на адрес /, исп-ть логику addNewWorkout, и пользователь д.б. авторизован
+router.route('/log').post(protect, createNewWorkoutLog)
+
 router.route('/:id').get(protect, getWorkout)
 
 export default router
