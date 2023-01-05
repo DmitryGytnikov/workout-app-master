@@ -34,9 +34,27 @@ export const updateExercise = asyncHandler(async (req, res) => {
 
 	exercise.name = name
 	exercise.times = times
-	exercise.imageId = imageId // Самомтоятельно заменил image на imageId
+	exercise.imageId = imageId // Самоcтоятельно заменил image на imageId
 
 	const updatedExercise = await exercise.save()
 
 	res.json(updatedExercise)
+})
+
+// @desc    Delete exercise
+// @route   DELETE /api/exercises
+// @access  Private
+export const deleteExercise = asyncHandler(async (req, res) => {
+	const { exerciseId } = req.body
+
+	const exercise = await Exercise.findById(exerciseId)
+
+	if (!exercise) {
+		res.status(404)
+		throw new Error('Данное упражнение не найдено!')
+	}
+
+	await exercise.remove()
+
+	res.json({ message: `Exercise ${exercise.name} has been removed` })
 })
