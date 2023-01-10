@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "node back/server",
 		"server": "nodemon back/server",
-		"client": "npm run dev --prefix front",
+		"client": "npm run start --prefix front",
 		"dev": "concurrently \"npm run server\" \"npm run client\""
 	},
 	"repository": {
