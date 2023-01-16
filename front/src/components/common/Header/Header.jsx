@@ -1,15 +1,34 @@
 import React from 'react'
-import styles from './Header.module.scss'
+import { useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
-import userImage from '../../../images/header/user.svg'
 import Hamburger from './Hamburger/Hamburger'
 
-const Header = () => {
+import styles from './Header.module.scss'
+import userImage from '../../../images/header/user.svg'
+import arrowImage from '../../../images/header/arrow.svg'
+
+const Header = ({ backCallback }) => {
+	const location = useLocation()
+	const navigate = useNavigate()
+	// debugger
+
 	return (
 		<header className={styles.header}>
-			<button type='button'>
-				<img src={userImage} alt='Auth' />
-			</button>
+			{location.pathname !== '/' ? (
+				<button
+					type='button'
+					onClick={() => {
+						navigate(-1) // Возврат на страницу, где были до этого
+					}}
+				>
+					<img src={arrowImage} alt='Auth' />
+				</button>
+			) : (
+				<button type='button'>
+					<img src={userImage} alt='Auth' />
+				</button>
+			)}
 			<Hamburger />
 		</header>
 	)
