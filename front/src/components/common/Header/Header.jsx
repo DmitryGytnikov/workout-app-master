@@ -25,7 +25,12 @@ const Header = ({ backCallback }) => {
 					<img src={arrowImage} alt='back' />
 				</button>
 			) : (
-				<button type='button'>
+				<button
+					type='button'
+					onClick={() => {
+						navigate('/auth')
+					}}
+				>
 					<img src={userImage} alt='Auth' />
 				</button>
 			)}
