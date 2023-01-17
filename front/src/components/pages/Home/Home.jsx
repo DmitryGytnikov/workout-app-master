@@ -12,7 +12,7 @@ const Home = () => {
 	const navigate = useNavigate()
 
 	return (
-		<Layout height='100%' bgImage={bgImage}>
+		<Layout bgImage={bgImage}>
 			{/* <div className={styles['home-wrapper']}> */}
 			{/* <Link to='/new-workout'>erf</Link> */}
 			<Button

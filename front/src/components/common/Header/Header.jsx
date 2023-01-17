@@ -22,7 +22,7 @@ const Header = ({ backCallback }) => {
 						navigate(-1) // Возврат на страницу, где были до этого
 					}}
 				>
-					<img src={arrowImage} alt='Auth' />
+					<img src={arrowImage} alt='back' />
 				</button>
 			) : (
 				<button type='button'>

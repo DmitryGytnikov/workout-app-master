@@ -33,6 +33,7 @@ const Hamburger = () => {
 				<img
 					src={show ? hamburgerCloseImage : hamburgerImage}
 					alt='hamburger'
+					height='24'
 				/>
 			</button>
 			<nav className={`${styles.menu} ${show ? styles.show : ''}`}>
