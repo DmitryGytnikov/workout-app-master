@@ -6,12 +6,46 @@ import Field from '../../ui/Field/Field'
 import Button from '../../ui/Button/Button'
 import Alert from '../../ui/Alert/Alert'
 
+import { useMutation } from 'react-query'
+
 import styles from './Auth.module.scss'
+import { $api } from '../../../api/api'
+import Loader from '../../ui/Loader'
 
 const Auth = () => {
 	const [email, setEmail] = React.useState('')
 	const [password, setPassword] = React.useState('')
 	const [type, setType] = React.useState('auth') // auth, reg
+
+	//useMutation() позволяет прокидывать данные (добавлять, обновлять), но не позволяет получать данные
+	// mutate - ф-ция, позволяющая делать запросы
+	// isLoading - отправляется автоматически когда идет загрузка, и можем лоадер показывать в это время
+	//error  - будет приходить если будет ошибка
+	const {
+		mutate: register,
+		isLoading,
+		error,
+	} = useMutation(
+		'Registration',
+		() =>
+			$api({
+				url: '/users',
+				type: 'POST',
+				body: { email, password },
+				auth: false,
+			}),
+		{
+			onSuccess(data) {
+				// Выполнится метод при успехе
+				// successLogin(data.token)
+				localStorage.setItem('token', data.token) //Записали токен
+
+				// console.log(data)
+			},
+		}
+	)
+
+	//  React context + LS
 
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -19,7 +53,8 @@ const Auth = () => {
 		if (type === 'auth') {
 			console.log('Auth')
 		} else {
-			console.log('Reg')
+			register()
+			// console.log('Reg')
 		}
 	}
 
@@ -27,8 +62,9 @@ const Auth = () => {
 		<>
 			<Layout bgImage={bgImage} heading='Auth || Register' />
 			<div className='wrapper-inner-page'>
-				{/* Если есть ошибка */}
-				{true && <Alert type='warning' text='You have been successfully' />}
+				{/* Если есть ошибка, то */}
+				{error && <Alert type='error' text={error} />}
+				{isLoading && <Loader />}
 				<form onSubmit={handleSubmit}>
 					<Field
 						type='email'

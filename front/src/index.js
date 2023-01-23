@@ -1,12 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './scss/index.scss'
+import Routes from './Routes'
 import reportWebVitals from './reportWebVitals'
-import App from './Routes'
+
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+const queryClient = new QueryClient()
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<QueryClientProvider client={queryClient}>
+			<Routes />
+			<ReactQueryDevtools initialIsOpen={false} />
+		</QueryClientProvider>
 	</React.StrictMode>,
 	document.getElementById('root')
 )
